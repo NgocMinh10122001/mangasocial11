@@ -220,7 +220,7 @@ function UserProfile() {
 
   return (
     <div className="bg-[#000000] h-full">
-      <div className="mx-5">
+      <div className="bg-[#000000] px-5">
         <div className="flex flex-col items-center text-[#fff] relative">
           <img
             src="images\UserProfile\Rectangle 457.png"
