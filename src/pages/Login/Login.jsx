@@ -139,10 +139,10 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
       </div>
       <Outlet></Outlet>
 {/* max-[435px]:bg-gradient-to-b max-[435px]:to-black max-[435px]:opacity-95 */}
-      <div className="bg-[url('/public/images/Login/bg-login.jpeg')] w-full h-full max-[435px]:h-screen  bg-cover bg-center bg-no-repeat relative " >
+      <div className="bg-[url('/public/images/Login/bg-login.jpeg')] w-full h-full max-[435px]:h-full  bg-cover bg-center bg-no-repeat relative " >
          <div className="max-[435px]:block hidden bg-gradient-to-b from-transparent to-black opacity-100 absolute top-0 bottom-0 right-0 left-0 z-[1]"></div>
       <div className="flex justify-center items-center h-full font-semibold relative z-[10]">
-        <div className="w-[520px] h-[746px] bg-[#353434] max-[435px]:bg-transparent flex flex-col gap-[31px] items-center justify-center max-[435px]:justify-start  rounded-xl  max-[435px]:w-full max-[435px]:h-full max-[435px]:mt-[36%]  max-[435px]:rounded-none max-[435px]:gap-[30px]">
+        <div className="w-[520px] h-[800px] bg-[#353434] max-[435px]:bg-transparent flex flex-col gap-[31px] items-center justify-center max-[435px]:justify-start  rounded-xl  max-[435px]:w-full max-[435px]:h-full max-[435px]:mt-[36%]  max-[435px]:rounded-none max-[435px]:gap-[30px]">
           <div className="flex items-center flex-col gap-3 ">
             <h1 className="text-4xl  text-white max-[435px]:text-3xl max-[435px]:leading-[28px] max-[435px]:font-semibold">Log in</h1>
             <h1 className="text-xl text-white max-[435px]:text-base max-[435px]:font-semibold">
@@ -192,7 +192,7 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
               )}
             </div>
 
-              <div className="w-full h-full" onClick={() => setLoading(false)}>
+              <div className="w-full h-full max-[435px]:flex max-[435px]:justify-center" onClick={() => setLoading(false)}>
                 <div className="w-full p-[10px] max-[435px]:w-[90%] bg-[#929292] rounded-md max-[435px]:rounded-xl hover:bg-[#EA6016] cursor-pointer" onClick={ handleSubmit}>
               <div
                 className="w-full border-none text-center outline-none text-white opacity-100 uppercase bg-transparent cursor-pointer max-[435px]:h-[16px] max-[435px]:text-xs max-[435px]:font-semibold ">
