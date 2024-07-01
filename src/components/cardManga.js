@@ -26,43 +26,8 @@ const CardManga = ({
     return parts[parts.length - 2];
   };
 
-  useEffect(() => {
-    if (readmode) {
-      if (sv === 4 || sv === 9 || sv === 11 || sv === 12) {
-        setPathName(
-          path_segment.replace(
-            `https://apimanga.mangasocial.online/web/rnovel/${sv}/`,
-            ""
-          )
-        );
-      } else {
-        setPathName(
-          path_segment.replace(
-            "https://apimanga.mangasocial.online/rmanga/",
-            ""
-          )
-        );
-      }
-    } else {
-      if (sv === 4 || sv === 9 || sv === 11 || sv === 12) {
-        setPathName(
-          path_segment.replace(
-            "https://apimanga.mangasocial.online/rnovel/",
-            ""
-          )
-        );
-      } else {
-        setPathName(
-          path_segment.replace(
-            "https://apimanga.mangasocial.online/rmanga/",
-            ""
-          )
-        );
-      }
-    }
-  }, []);
   return (
-    <NavLink to={`/${sv}/chapter/${pathName}`}>
+    <NavLink to={`/${sv}/chapter/${path_segment}`}>
       <div className=" cursor-pointer">
         <div className="rounded-xl group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
           <div className="w-full h-[300px] max-[435px]:h-[160px]">
@@ -86,7 +51,7 @@ const CardManga = ({
               //     ? getChapterFromUrl2(chapterNumberReadMode)
               //     : getChapterFromUrl(chapterNumberReadMode)
               // }`}
-              to={`/${sv}/chapter/${pathName}/${getChapterFromUrl(
+              to={`/${sv}/chapter/${path_segment}/${getChapterFromUrl(
                 chapterNumberReadMode
               )}`}
             >

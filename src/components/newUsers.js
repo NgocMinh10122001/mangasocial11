@@ -27,7 +27,7 @@ const NewUsers = () => {
           <div className="lab">
             <label>NEW USER</label>{" "}
           </div>
-          <div className="hidden max-[435px]:flex  flex-col justify-center gap-4">
+          <div className=" max-[435px]:flex  flex-col justify-center gap-4">
             {newUser &&
               newUser.map((newUser, index) => {
                 return (

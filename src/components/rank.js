@@ -43,7 +43,7 @@ const Rank = () => {
           Year
         </span>
       </div>
-      <div className="flex flex-wrap flex-row justify-center gap-4 w-full">
+      <div className="flex flex-wrap flex-row max-[435px]:justify-center gap-4 w-full">
         {rankComics?.slice(0, 20).map((item, index) => (
           <RankItem
             key={index}

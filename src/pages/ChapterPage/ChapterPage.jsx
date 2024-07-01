@@ -291,7 +291,7 @@ const ChapterPage = () => {
             <div className="flex flex-col gap-[40px]">
               {/* button */}
               <div className="flex  gap-5">
-                <Link to={`/${sv}/chapter/${slug}/${readmode ? getChapterFromUrl2(linkList[0]?? "") : getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
+                <Link to={`/${sv}/${sv === 4 || sv === 9 || sv === 11 || sv === 12 ? "novel" : "chapter"}/${slug}/${readmode ? getChapterFromUrl2(linkList[0]?? "") : getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
                   <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
                     Read now
                   </div>
@@ -427,7 +427,6 @@ const ChapterPage = () => {
                       .slice(0, visibleChapterCount)
                       .map((item, index) => (
                         <div key={index}>
-                          {console.log("check link", item)}
                           <ChapterCard
                             chapterLink={item}
                             chapterName={readmode? arrChapterLink[index]: getChapterFromUrl(item)}
