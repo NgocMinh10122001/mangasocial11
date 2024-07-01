@@ -27,7 +27,7 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
   return (
     <>
      
-        <NavLink to={`/${sv}/${sv === 4  || sv === 11 || sv === 12 ? "novel" : "chapter"}/${slug}/${readmode ?getChapterFromUrl2(chapterNumberReadMode) :getChapterFromUrl(chapterNumberReadMode)}`}>
+        <NavLink to={`/${sv}/${sv === 4  || sv === 11  ? "novel" : "chapter"}/${slug}/${readmode ?getChapterFromUrl2(chapterNumberReadMode) :getChapterFromUrl(chapterNumberReadMode)}`}>
           <div className=" flex items-center gap-[239px] cursor-pointer py-[24px] px-[48px] hover:bg-[#000] border-b-2 border-gray-500 rounded-xl">
             {/* chapter info */}
             <div className="flex items-center gap-[12px] ">

@@ -45,7 +45,7 @@ const Novel = () => {
           >
             bestlightnovel.com
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to={"/" + 12 + "/novel"}
             className="bg-red-400 h-8 px-2 rounded-lg text-white"
             onClick={() => {
@@ -53,14 +53,14 @@ const Novel = () => {
             }}
           >
             mto.to
-          </NavLink>
-          <NavLink
+          </NavLink> */}
+          {/* <NavLink
             to={"/" + 9 + "/novel"}
             className="bg-red-400 h-8 px-2 rounded-lg text-white"
             onClick={() => dispatch(changeServer(9))}
           >
             swatmanga.net
-          </NavLink>
+          </NavLink> */}
         </div>
       </div>
       <div className="cont">
