@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 const NovelCard = ({ poster, title, rate, update, chapter, path_segment }) => {
   const sv = useSelector((state) => state.server.sv);
   return (
-    <NavLink to={`/${sv}/novel/${path_segment}`}>
+    <NavLink to={`/${sv}/chapter/${path_segment}`}>
       <div className=" cursor-pointer">
         <div className="rounded-xl group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
           <div className="w-[200px] h-[300px]">

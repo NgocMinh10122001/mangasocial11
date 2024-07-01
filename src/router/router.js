@@ -109,6 +109,10 @@ const router = createBrowserRouter([
         element: <NovelPage />,
       },
       {
+        path: "/:sv/novel/:slug/:chapter",
+        element: <NovelPage />,
+      },
+      {
         path: "/:sv/genres/:category",
         element: <MangaCategory />,
       },

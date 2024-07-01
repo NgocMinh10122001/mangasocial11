@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -13,9 +13,10 @@ const CardManga = ({
 }) => {
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
+  const [pathName, setPathName] = useState("");
   const chapterNumberReadMode = chapterLink ? chapterLink : "minhdz";
   // console.log("check link", chapterNumberReadMode);
-  // console.log("chapter",chapterLink);
+  console.log("chapter", path_segment);
   const getChapterFromUrl = (url) => {
     const parts = url.split("/");
     return parts[parts.length - 1];
@@ -25,9 +26,43 @@ const CardManga = ({
     return parts[parts.length - 2];
   };
 
-  // console.log("check link", chapterNumberReadMode);
+  useEffect(() => {
+    if (readmode) {
+      if (sv === 4 || sv === 9 || sv === 11 || sv === 12) {
+        setPathName(
+          path_segment.replace(
+            `https://apimanga.mangasocial.online/web/rnovel/${sv}/`,
+            ""
+          )
+        );
+      } else {
+        setPathName(
+          path_segment.replace(
+            "https://apimanga.mangasocial.online/rmanga/",
+            ""
+          )
+        );
+      }
+    } else {
+      if (sv === 4 || sv === 9 || sv === 11 || sv === 12) {
+        setPathName(
+          path_segment.replace(
+            "https://apimanga.mangasocial.online/rnovel/",
+            ""
+          )
+        );
+      } else {
+        setPathName(
+          path_segment.replace(
+            "https://apimanga.mangasocial.online/rmanga/",
+            ""
+          )
+        );
+      }
+    }
+  }, []);
   return (
-    <NavLink to={`/${sv}/chapter/${path_segment}`}>
+    <NavLink to={`/${sv}/chapter/${pathName}`}>
       <div className=" cursor-pointer">
         <div className="rounded-xl group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
           <div className="w-full h-[300px] max-[435px]:h-[160px]">
@@ -51,7 +86,7 @@ const CardManga = ({
               //     ? getChapterFromUrl2(chapterNumberReadMode)
               //     : getChapterFromUrl(chapterNumberReadMode)
               // }`}
-              to={`/${sv}/chapter/${path_segment}/${getChapterFromUrl(
+              to={`/${sv}/chapter/${pathName}/${getChapterFromUrl(
                 chapterNumberReadMode
               )}`}
             >
