@@ -139,8 +139,8 @@ const NovelPage = () => {
     const res = await axios.get(link_novel);
     setChapterData(res.data);
     let content = res.data.content || res.data.content_chapter;
-    let first = content.indexOf("Chapter");
-    let last = content.indexOf("Chapter", first + 1);
+    let first = content.indexOf("Chapter" || "");
+    let last = content.indexOf("Chapter" || "", first + 1);
     setSubTitle(content.substring(first + 10, last));
   };
 
