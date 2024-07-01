@@ -71,137 +71,191 @@ export default function Layout() {
       sv: 0,
       name: "mangainn.net",
       icon: (
-        <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5 " />
+        <US
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5 "
+        />
       ),
     },
     {
       sv: 1,
       name: "ww5.manganelo.tv",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 2,
       name: "mangareader.cc",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5 "
+        />
       ),
     },
     {
       sv: 3,
       name: "ninemanga.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 4,
       name: "bestlightnovel.com",
       icon: (
-        <XK title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <XK
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 5,
       name: "mangajar.com/manga",
       icon: (
-        <EU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <EU
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 6,
       name: "mangakomi.io",
       icon: (
-        <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <US
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 7,
       name: "readm.org",
       icon: (
-        <EU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <EU
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     // {
     //   sv: 8,
     //   name: "mangajar.com",
-    //   icon: <XK title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />,
+    //   icon: <XK title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />,
     // },
     {
       sv: 9,
       name: "swatmanga.com",
       icon: (
-        <EU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <EU
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 10,
       name: "mangajar.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 11,
       name: "novelhall.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 12,
       name: "mto.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 13,
       name: "de.ninemanga.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 14,
       name: "br.ninemanga.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 15,
       name: "ru.ninemanga.com",
       icon: (
-        <RU title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <RU
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 16,
       name: "es.ninemanga.com",
       icon: (
-        <JP title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <JP
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 17,
       name: "fr.ninemanga.com",
       icon: (
-        <FR title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <FR
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     {
       sv: 18,
       name: "it.ninemanga.com",
       icon: (
-        <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />
+        <US
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
       ),
     },
     // {
     //   sv: 19,
     //   name: "azoranov.com/series/",
-    //   icon: <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5" />,
+    //   icon: <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />,
     // },
   ];
 
