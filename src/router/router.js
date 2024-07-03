@@ -27,6 +27,9 @@ import ViewUserProfile from "../pages/profile/index.js";
 import Novel from "../pages/Novel/Novel.js";
 import NovelPage from "../pages/Novel/NovelPage.js";
 import SignUpSuccess from "../pages/SignUp/SignUpSuccess";
+import NovelPage2 from "../pages/NovelPage/NovelPage2";
+import NovelPageGenre from "../pages/Novel/NovelPageGenre";
+import ReadChapter2 from "../pages/ReadChapter/ReadChapter2";
 
 // console.log("check sv di ko", sv);
 const router = createBrowserRouter([
@@ -105,12 +108,24 @@ const router = createBrowserRouter([
         element: <ReadChapter />,
       },
       {
+        path: "/:sv/chapter2/:slug/:id",
+        element: <ReadChapter2 />,
+      },
+      {
         path: "/:sv/novel/:slug",
         element: <NovelPage />,
       },
       {
         path: "/:sv/novel/:slug/:chapter",
         element: <NovelPage />,
+      },
+      {
+        path: "/:sv/novel2/:slug/:chapter",
+        element: <NovelPageGenre />,
+      },
+      {
+        path: "/:sv/novel2/:slug",
+        element: <NovelPage2 />,
       },
       {
         path: "/:sv/genres/:category",

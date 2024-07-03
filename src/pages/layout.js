@@ -44,6 +44,7 @@ export default function Layout() {
 
   //handle search
   const [input, setInput] = useState("");
+  // console.log("check input", );
   const [search, setSearch] = useState("");
   const [searchData, setSearchData] = useState("");
   const [idMangaList, setIdMangaList] = useState("0");
@@ -320,7 +321,6 @@ export default function Layout() {
         input
       );
       setSearchData(response.data);
-      console.log(response.data);
       if (response.status == 200) {
         setCheckSearch(true);
       }
@@ -583,7 +583,7 @@ export default function Layout() {
             <SubMenu />
           )}
           {/*  */}
-          {checkSearch ? (
+          {checkSearch && input.content && input !== "" ? (
             <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
               <hr className="mt-[150px]" />
               {searchData ? (
@@ -666,7 +666,7 @@ export default function Layout() {
             />
           </div>
           {/*  */}
-          {checkSearch ? (
+          {checkSearch && input.content && input.content !== "" ? (
             <div className="h-80 w-[17rem] bg-[#DADADA] absolute mt-[375px] ml-[50px] rounded-lg border-double flex justify-center flex-col items-center overflow-y-auto ">
               <hr className="mt-[150px]" />
               {searchData ? (

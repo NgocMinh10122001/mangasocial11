@@ -8,10 +8,13 @@ import Comments from "../../components/comments";
 import CMT from "../../components/cmt";
 import { Buffer } from "buffer";
 import Cookies from "js-cookie";
-import CMT_list from "./../../components/cmt_list";
+import CMT_list from "../../components/cmt_list";
 import Loading from "../../components/Loading/Loading";
+import NovelCard from "../../components/NovelCard/NovelCard";
+import NovelCard2 from "../Novel/NovelCard2";
+import ChapterCard2 from "../../components/ChapterCard/ChapterCard2";
 
-const ChapterPage = () => {
+const NovelPage2 = () => {
   const [showTab, setShowTab] = useState(true);
   const [chapterDetail, setChapterDetail] = useState([]);
   const [listChapter, setListChapter] = useState([]);
@@ -65,7 +68,7 @@ const ChapterPage = () => {
   //fetch data chapter
   const fetchChapterDetail = async () => {
     try {
-      if (readmode == false) {
+     
         const response = await axios.get(
           `https://apimanga.mangasocial.online/rmanga/${slug}`
         );
@@ -73,25 +76,7 @@ const ChapterPage = () => {
         setListChapter(response.data.chapters);
         // setCommentDetail(response.data.comment)
         setLoading(false);
-      } else {
-        if (sv === 4) { 
-           const response = await axios.get(
-          `https://apimanga.mangasocial.online/web/rnovel/${sv}/${slug}/`
-           );
-          console.log("check res4", response);
-        setChapterDetail(response.data);
-        setListChapter(response.data.chapters);
-        setLoading(false);
-        }
-        else { 
-          const response = await axios.get(
-          `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`
-        );
-        setChapterDetail(response.data);
-        setListChapter(response.data.chapters);
-        setLoading(false);
-        }
-      }
+      
     } catch (error) {
       console.log(error);
       console.log("slug:", slug);
@@ -291,7 +276,7 @@ const ChapterPage = () => {
             <div className="flex flex-col gap-[40px]">
               {/* button */}
               <div className="flex  gap-5">
-                <Link to={`/${sv}/${sv === 4  || sv === 11  ? "novel" : "chapter"}/${slug}/${readmode ? getChapterFromUrl2(linkList[0]?? "") : getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
+                <Link to={`/${sv}/novel/${slug}/${readmode ? getChapterFromUrl2(linkList[0]?? "") : getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
                   <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
                     Read now
                   </div>
@@ -425,20 +410,36 @@ const ChapterPage = () => {
                   <div className="px-12 py-6">
                     {linkList
                       .slice(0, visibleChapterCount)
-                      .map((item, index) => (
-                        <div key={index}>
-                          { console.log("chapter genre", chapterDetail)}
-                          <ChapterCard
-                            chapterLink={item}
-                            chapterName={readmode? arrChapterLink[index]: getChapterFromUrl(item)}
-                            title={chapterDetail?.title || chapterDetail?.title_novel}
-                            des={chapterDetail?.description}
-                            poster={chapterDetail?.poster}
-                            genre={ chapterDetail?.genres}
-                            slug={slug}
-                          />
-                        </div>
-                      ))}
+                      .map((item, index) => { 
+                        if (chapterDetail?.genres === "novel") {
+                          return <div key={index}>
+                            {/* { console.log("cehck genre",chapterDetail?.genres)} */}
+                            <NovelCard
+                              chapterLink={item}
+                              chapterName={readmode ? arrChapterLink[index] : getChapterFromUrl(item)}
+                              title={chapterDetail?.title || chapterDetail?.title_novel}
+                              des={chapterDetail?.description}
+                              poster={chapterDetail?.poster}
+                              genre={ chapterDetail?.genres}
+                              slug={slug}
+                            />
+                          </div>
+                        } else { 
+                           return <div key={index}>
+                         
+                            <ChapterCard2
+                              chapterLink={item}
+                              chapterName={readmode ? arrChapterLink[index] : getChapterFromUrl(item)}
+                              title={chapterDetail?.title || chapterDetail?.title_novel}
+                              des={chapterDetail?.description}
+                              poster={chapterDetail?.poster}
+                              slug={slug}
+                            />
+                          </div>
+                        }
+                      } 
+                        
+                      )}
                   </div>
               
                 <div className="text-center mt-5">
@@ -515,4 +516,4 @@ const ChapterPage = () => {
   );
 };
 
-export default ChapterPage;
+export default NovelPage2;

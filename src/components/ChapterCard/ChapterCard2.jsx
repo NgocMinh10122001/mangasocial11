@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterName, genre }) => {
+const ChapterCard2 = ({ chapter, title, poster, des, slug, chapterLink,chapterName }) => {
   // console.log("check link", chapterLink);
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
@@ -21,13 +21,13 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
     const parts = url.split('/');
     return parts[parts.length - 2];
   };
-  console.log("check slug", genre)
+  // console.log("check slug", chapterLink)
 
   const truncatedDes = des.length > 50 ? `${des.slice(0, 50)}...` : des;
   return (
     <>
      
-        <NavLink to={`/${sv}/${genre === "manga" ? "chapter" : "novel"}/${slug}/${readmode ?getChapterFromUrl2(chapterNumberReadMode) :getChapterFromUrl(chapterNumberReadMode)}`}>
+        <NavLink to={`/${sv}/chapter2/${slug}/${getChapterFromUrl(chapterNumberReadMode)}`}>
           <div className=" flex items-center gap-[239px] cursor-pointer py-[24px] px-[48px] hover:bg-[#000] border-b-2 border-gray-500 rounded-xl">
             {/* chapter info */}
             <div className="flex items-center gap-[12px] ">
@@ -64,4 +64,4 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
   );
 };
 
-export default ChapterCard;
+export default ChapterCard2;
