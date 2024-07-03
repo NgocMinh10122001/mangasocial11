@@ -53,7 +53,7 @@ const MangaCategory = () => {
               rate={item?.rate}
               update={item.time_release}
               chapter={getChapterFromUrl(item?.chaper_new || "/")}
-              path_segment={getChapterFromUrl(item?.id_manga || "/")}
+              path_segment={ item?.id_manga.includes(".html") ? getChapterFromUrl(item?.id_manga.replace('.html', '')) :getChapterFromUrl(item?.id_manga || "/")}
             />
          
           

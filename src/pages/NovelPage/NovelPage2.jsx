@@ -276,7 +276,7 @@ const NovelPage2 = () => {
             <div className="flex flex-col gap-[40px]">
               {/* button */}
               <div className="flex  gap-5">
-                <Link to={`/${sv}/novel/${slug}/${readmode ? getChapterFromUrl2(linkList[0]?? "") : getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
+                <Link to={`/${sv}/${chapterDetail?.genres === "manga" ?"chapter" : "novel"}/${slug}/${getChapterFromUrl(linkList[0]?? "")}`} className=" hover:text-white p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
                   <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
                     Read now
                   </div>
@@ -416,7 +416,7 @@ const NovelPage2 = () => {
                             {/* { console.log("cehck genre",chapterDetail?.genres)} */}
                             <NovelCard
                               chapterLink={item}
-                              chapterName={readmode ? arrChapterLink[index] : getChapterFromUrl(item)}
+                              chapterName={ getChapterFromUrl(item)}
                               title={chapterDetail?.title || chapterDetail?.title_novel}
                               des={chapterDetail?.description}
                               poster={chapterDetail?.poster}
@@ -429,7 +429,7 @@ const NovelPage2 = () => {
                          
                             <ChapterCard2
                               chapterLink={item}
-                              chapterName={readmode ? arrChapterLink[index] : getChapterFromUrl(item)}
+                              chapterName={ getChapterFromUrl(item)}
                               title={chapterDetail?.title || chapterDetail?.title_novel}
                               des={chapterDetail?.description}
                               poster={chapterDetail?.poster}
