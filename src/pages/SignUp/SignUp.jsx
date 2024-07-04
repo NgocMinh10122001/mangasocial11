@@ -4,9 +4,11 @@ import axios from "axios";
 import * as message from "../../components/Message/Message";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import CustomizeSpin from "../../components/spin/CustomizeSpin";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(true)
   const user = useSelector((store) => store.user);
   console.log("user", user);
   const navigate = useNavigate();
@@ -25,15 +27,18 @@ const SignUp = () => {
 //       await message.success(`Signup is successfully, You have successfully registered for a mangasocial account. Please log in to your email, search for the verify account email to activate it, if not found, go to spam to search
 // `);
       // console.log("check res", response);
-
+        
       setTimeout(() => { 
+        setLoading(true)
         navigate("/sign-up-success");
       },1000)
     } catch (error) {
+      setLoading(true)
       message.error(`${error.response.data.message}`);
     }
   };
   const onFinishFailed = (errorInfo) => {
+    setLoading(true)
     console.log("Failed:", errorInfo);
   };
 
@@ -136,13 +141,13 @@ const SignUp = () => {
             />
           </div>
 
-          <Form.Item wrapperCol={{ span: 24 }} className="mt-1">
+          <Form.Item wrapperCol={{ span: 24 }} className="mt-1" onClick={() => setLoading(false)}>
             <Button
               type="primary"
               htmlType="submit"
               className="w-full h-[44px] rounded-[12px] p-[10px] bg-[#EA6016] focus:outline-none hover:bg-[#929292]  border-none "
             >
-              Sign Up
+              { loading ? "Sign Up": <CustomizeSpin/>}
             </Button>
           </Form.Item>
         </Form>

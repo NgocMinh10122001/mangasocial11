@@ -12,6 +12,8 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { Modal } from "antd";
 import { Button, Checkbox, Form, Input } from "antd";
 import * as message from "../../components/Message/Message";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { IoClose } from "react-icons/io5";
 function UserProfile() {
   const [userData, setUserData] = useState();
   console.log("check userdata", userData);
@@ -25,6 +27,7 @@ function UserProfile() {
   const [openBirth, setBirth] = useState(false);
   const [openPass, setPass] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [toggleSetting, setToggleSetting] = useState(false);
   console.log("check id", sessionStorage.getItem("user_id"));
   const onFinish = async (values) => {
     try {
@@ -51,7 +54,8 @@ function UserProfile() {
   };
   const handleGender = () => {
     let selectGender = document.getElementById("gender");
-    let selectedValue = selectGender.options[selectGender.selectedIndex].value;
+    let selectedValue =
+      selectGender.options[selectGender.selectedIndex].value || "";
     setGioitinh(selectedValue);
   };
   const handleChangeData = (e) => {
@@ -227,7 +231,7 @@ function UserProfile() {
             alt=""
             className="w-full h-[500px] bg-[#ffff] bg-cover rounded-b-[150px]"
           />
-          <div className="h-60 w-full relative">
+          <div className="h-60 w-full relative flex  items-center">
             <div className="flex absolute bottom-0">
               <div>
                 <img
@@ -326,361 +330,375 @@ function UserProfile() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="flex flex-col w-[526px] bg-[#676767] mt-[52px] text-[#fff] mb-24 rounded-lg">
-          <div className="mx-6">
-            <div>
-              <h2 className="text-[36px] text-[#fff]">Introduce</h2>
-              <hr />
-              <div className="flex">
-                {!openIntroduction ? (
-                  <p type="text" className="text-[24px] inline-block w-[90%]">
-                    {userData?.introduction
-                      ? userData.introduction
-                      : "Update Introduction"}
-                  </p>
-                ) : (
-                  <input
-                    type="text"
-                    placeholder="Type something..."
-                    className="text-black w-[90%] h-28 rounded-sm"
-                    onChange={(e) => handleChangeData(e)}
-                  />
-                )}
-
-                {!openIntroduction ? (
-                  <svg
-                    onClick={() => showModalInput("introduction")}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    className="lucide lucide-pencil cursor-pointer ml-4"
-                  >
-                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                    <path d="m15 5 4 4" />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-check ml-4 cursor-pointer"
-                    onClick={() => hideModal("introduction")}
-                  >
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
-                )}
+            <div className="flex absolute bottom-[50%] right-0 ">
+              <div
+                className="px-2 py-[2px] bg-[#2D2D2D] rounded-xl hover:cursor-pointer"
+                onClick={() => setToggleSetting(!toggleSetting)}
+              >
+                <HiOutlineDotsHorizontal size={45} className="text-white" />
               </div>
-              <hr />
-            </div>
-            <div className="flex  my-[30px] items-center gap-2">
-              <PiBagSimpleFill
-                size={30}
-                className="text-white"
-                onClick={() => showModalInput("job")}
-              />
+              <div
+                className={`setting absolute top-[120%] transform ${
+                  toggleSetting
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-full   opacity-0"
+                }  duration-500 right-0 flex flex-col w-[526px] bg-[#676767]  text-[#fff] mb-24 rounded-lg`}
+              >
+                <div className="mx-6">
+                  <div>
+                    <h2 className="text-[36px] text-[#fff]">Setting</h2>
+                    <hr />
+                    <div className="flex">
+                      {!openIntroduction ? (
+                        <p
+                          type="text"
+                          className="text-[24px] inline-block w-[90%]"
+                        >
+                          {userData?.introduction
+                            ? userData.introduction
+                            : "Update Introduction"}
+                        </p>
+                      ) : (
+                        <input
+                          type="text"
+                          placeholder="Type something..."
+                          className="text-black w-[90%] h-28 rounded-sm"
+                          onChange={(e) => handleChangeData(e)}
+                        />
+                      )}
 
-              {!openJob ? (
-                <div className="flex">
-                  <p className="text-[22px] pl-2">
-                    {userData?.job ? userData.job : "Update Job"}
-                  </p>
-                  <svg
-                    onClick={() => showModalInput("job")}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    className="lucide lucide-pencil cursor-pointer ml-4"
-                  >
-                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                    <path d="m15 5 4 4" />
-                  </svg>
-                  {/* <PiBagSimpleFill
+                      {!openIntroduction ? (
+                        <svg
+                          onClick={() => showModalInput("introduction")}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="28"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          className="lucide lucide-pencil cursor-pointer ml-4"
+                        >
+                          <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                          <path d="m15 5 4 4" />
+                        </svg>
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="28"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-check ml-4 cursor-pointer"
+                          onClick={() => hideModal("introduction")}
+                        >
+                          <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                      )}
+                    </div>
+                    <hr />
+                  </div>
+                  <div className="flex  my-[30px] items-center gap-2">
+                    <PiBagSimpleFill
+                      size={30}
+                      className="text-white"
+                      onClick={() => showModalInput("job")}
+                    />
+
+                    {!openJob ? (
+                      <div className="flex">
+                        <p className="text-[22px] pl-2">
+                          {userData?.job ? userData.job : "Update Job"}
+                        </p>
+                        <svg
+                          onClick={() => showModalInput("job")}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="28"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          className="lucide lucide-pencil cursor-pointer ml-4"
+                        >
+                          <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                          <path d="m15 5 4 4" />
+                        </svg>
+                        {/* <PiBagSimpleFill
                     size={30}
                     className="text-white"
                     onClick={() => showModalInput("job")}
                   /> */}
-                </div>
-              ) : (
-                <div className="flex">
-                  <input
-                    type="text"
-                    placeholder="type job..."
-                    className="rounded-lg text-black"
-                    onChange={(e) => handleChangeData(e)}
-                  />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-check ml-4 cursor-pointer"
-                    onClick={() => hideModal("job")}
-                  >
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
-
-                  {/* <PiBagSimpleFill size={ 20}  onClick={() => hideModal("job")}/> */}
-                </div>
-              )}
-            </div>
-            <div className="flex mb-[30px] gap-2 items-center">
-              <PiGenderIntersexFill size={33} className="text-white" />
-              {!openGender ? (
-                <div className="flex">
-                  <p className="text-[22px] pl-2">
-                    {userData?.gender || "Update Sex"}
-                  </p>
-                  <svg
-                    onClick={() => showModalInput("gender")}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    className="lucide lucide-pencil cursor-pointer ml-4"
-                  >
-                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                    <path d="m15 5 4 4" />
-                  </svg>
-                  {/* <PiGenderIntersexFill size={30} className="text-white" />; */}
-                </div>
-              ) : (
-                <div className="flex">
-                  <select
-                    name="gender"
-                    id="gender"
-                    className="rounded-lg text-black"
-                    onChange={() => handleGender()}
-                  >
-                    {userData.gender == "male" ? (
-                      <>
-                        <option value="male">male</option>
-                        <option value="female">female</option>
-                      </>
+                      </div>
                     ) : (
-                      <>
-                        <option value="female">female</option>
-                        <option value="male">male</option>
-                      </>
+                      <div className="flex">
+                        <input
+                          type="text"
+                          placeholder="type job..."
+                          className="rounded-lg text-black"
+                          onChange={(e) => handleChangeData(e)}
+                        />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="28"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-check ml-4 cursor-pointer"
+                          onClick={() => hideModal("job")}
+                        >
+                          <path d="M20 6 9 17l-5-5" />
+                        </svg>
+
+                        {/* <PiBagSimpleFill size={ 20}  onClick={() => hideModal("job")}/> */}
+                      </div>
                     )}
-                  </select>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-check ml-4 cursor-pointer"
-                    onClick={() => hideModal("gender")}
-                  >
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
-                </div>
-              )}
-            </div>
-            <div className="flex mb-[30px] gap-2 items-center">
-              <FaTags size={30} className="text-white" />
+                  </div>
+                  <div className="flex mb-[30px] gap-2 items-center">
+                    <PiGenderIntersexFill size={33} className="text-white" />
+                    {!openGender ? (
+                      <div className="flex">
+                        <p className="text-[22px] pl-2">
+                          {userData?.gender || "Update Sex"}
+                        </p>
+                        <svg
+                          onClick={() => showModalInput("gender")}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="28"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          className="lucide lucide-pencil cursor-pointer ml-4"
+                        >
+                          <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                          <path d="m15 5 4 4" />
+                        </svg>
+                        {/* <PiGenderIntersexFill size={30} className="text-white" />; */}
+                      </div>
+                    ) : (
+                      <div className="flex">
+                        <select
+                          name="gender"
+                          id="gender"
+                          className="rounded-lg text-black"
+                          onChange={() => handleGender()}
+                        >
+                          {userData.gender == "male" ? (
+                            <>
+                              <option value="male">male</option>
+                              <option value="female">female</option>
+                            </>
+                          ) : (
+                            <>
+                              <option value="female">female</option>
+                              <option value="male">male</option>
+                            </>
+                          )}
+                        </select>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="28"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-check ml-4 cursor-pointer"
+                          onClick={() => hideModal("gender")}
+                        >
+                          <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex mb-[30px] gap-2 items-center">
+                    <FaTags size={30} className="text-white" />
 
-              <p className="text-[22px] pl-2">Manga-Action-Mystery</p>
-            </div>
-            <div className="flex mb-[30px] gap-2 items-center">
-              <FaBirthdayCake size={27} className="text-white" />
+                    <p className="text-[22px] pl-2">Manga-Action-Mystery</p>
+                  </div>
+                  <div className="flex mb-[30px] gap-2 items-center">
+                    <FaBirthdayCake size={27} className="text-white" />
 
-              {!openBirth ? (
-                <div className="flex">
-                  <p className="text-[22px] pl-2">
-                    {userData?.date_of_birth
-                      ? userData.date_of_birth
-                      : "Date of birth has not been set"}
-                  </p>
-                  <svg
-                    onClick={() => showModalInput("birth")}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    className="lucide lucide-pencil cursor-pointer ml-4"
-                  >
-                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                    <path d="m15 5 4 4" />
-                  </svg>
-                  {/* <FaBirthdayCake size={30} className="text-white" /> */}
-                </div>
-              ) : (
-                <div className="flex">
-                  <input
-                    type="text"
-                    placeholder="format dd/mm/yyyy"
-                    className="text-black"
-                    onChange={(e) => handleGender(e)}
-                  />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-check ml-4 cursor-pointer"
-                    onClick={() => hideModal("birth")}
-                  >
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
-                </div>
-              )}
-            </div>
-            <div className="flex mb-[30px] gap-2 items-center">
-              <RiKey2Fill size={31} className="text-white" />
+                    {!openBirth ? (
+                      <div className="flex">
+                        <p className="text-[22px] pl-2">
+                          {userData?.date_of_birth
+                            ? userData.date_of_birth
+                            : "Date of birth has not been set"}
+                        </p>
+                        <svg
+                          onClick={() => showModalInput("birth")}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="28"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          className="lucide lucide-pencil cursor-pointer ml-4"
+                        >
+                          <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                          <path d="m15 5 4 4" />
+                        </svg>
+                        {/* <FaBirthdayCake size={30} className="text-white" /> */}
+                      </div>
+                    ) : (
+                      <div className="flex">
+                        <input
+                          type="text"
+                          placeholder="format dd/mm/yyyy"
+                          className="text-black"
+                          onChange={(e) => handleChangeData(e)}
+                        />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="28"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-check ml-4 cursor-pointer"
+                          onClick={() => hideModal("birth")}
+                        >
+                          <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex mb-[30px] gap-2 items-center">
+                    <RiKey2Fill size={31} className="text-white" />
 
-              {/* {!openPass ? ( */}
-              <div className="flex">
-                <p className="text-[22px] pl-2">Password</p>
-                <svg
-                  onClick={() => showModalInput("pass")}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  className="lucide lucide-pencil cursor-pointer ml-4"
-                >
-                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                  <path d="m15 5 4 4" />
-                </svg>
-                {/* <FaBirthdayCake size={30} className="text-white" /> */}
-                <Modal
-                  title="Basic Modal"
-                  open={isModalOpen}
-                  onCancel={handleCancel}
-                  footer={false}
-                >
-                  <Form
-                    name="basic"
-                    labelCol={{
-                      span: 8,
-                    }}
-                    wrapperCol={{
-                      span: 16,
-                    }}
-                    style={{
-                      maxWidth: 600,
-                    }}
-                    initialValues={{
-                      remember: true,
-                    }}
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    autoComplete="off"
-                  >
-                    <Form.Item
-                      label="Current Password"
-                      name="current_username"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your username!",
-                        },
-                      ]}
-                    >
-                      <Input />
-                    </Form.Item>
-
-                    <Form.Item
-                      label="New Password"
-                      name="new_password"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your password!",
-                        },
-                      ]}
-                    >
-                      <Input.Password />
-                    </Form.Item>
-                    <Form.Item
-                      label="Confirm Password"
-                      name="confirm_password"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your password!",
-                        },
-                      ]}
-                    >
-                      <Input.Password />
-                    </Form.Item>
-
-                    <Form.Item
-                      wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                      }}
-                    >
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="me-4 !text-blue-500 hover:!text-white"
+                    {/* {!openPass ? ( */}
+                    <div className="flex">
+                      <p className="text-[22px] pl-2">Password</p>
+                      <svg
+                        onClick={() => showModalInput("pass")}
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="28"
+                        height="28"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        className="lucide lucide-pencil cursor-pointer ml-4"
                       >
-                        Submit
-                      </Button>
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        onClick={handleCancel}
-                        className=" !text-blue-500 hover:!text-white"
+                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                        <path d="m15 5 4 4" />
+                      </svg>
+                      {/* <FaBirthdayCake size={30} className="text-white" /> */}
+                      <Modal
+                        title="Basic Modal"
+                        open={isModalOpen}
+                        onCancel={handleCancel}
+                        footer={false}
                       >
-                        Cancel
-                      </Button>
-                    </Form.Item>
-                  </Form>
-                </Modal>
-              </div>
-              {/* ) : (
+                        <Form
+                          name="basic"
+                          labelCol={{
+                            span: 8,
+                          }}
+                          wrapperCol={{
+                            span: 16,
+                          }}
+                          style={{
+                            maxWidth: 600,
+                          }}
+                          initialValues={{
+                            remember: true,
+                          }}
+                          onFinish={onFinish}
+                          onFinishFailed={onFinishFailed}
+                          autoComplete="off"
+                        >
+                          <Form.Item
+                            label="Current Password"
+                            name="current_username"
+                            rules={[
+                              {
+                                required: true,
+                                message: "Please input your username!",
+                              },
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+
+                          <Form.Item
+                            label="New Password"
+                            name="new_password"
+                            rules={[
+                              {
+                                required: true,
+                                message: "Please input your password!",
+                              },
+                            ]}
+                          >
+                            <Input.Password />
+                          </Form.Item>
+                          <Form.Item
+                            label="Confirm Password"
+                            name="confirm_password"
+                            rules={[
+                              {
+                                required: true,
+                                message: "Please input your password!",
+                              },
+                            ]}
+                          >
+                            <Input.Password />
+                          </Form.Item>
+
+                          <Form.Item
+                            wrapperCol={{
+                              offset: 8,
+                              span: 16,
+                            }}
+                          >
+                            <Button
+                              type="primary"
+                              htmlType="submit"
+                              className="me-4 !text-blue-500 hover:!text-white"
+                            >
+                              Submit
+                            </Button>
+                            <Button
+                              type="primary"
+                              htmlType="submit"
+                              onClick={handleCancel}
+                              className=" !text-blue-500 hover:!text-white"
+                            >
+                              Cancel
+                            </Button>
+                          </Form.Item>
+                        </Form>
+                      </Modal>
+                    </div>
+                    {/* ) : (
                 <div className="flex">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -699,33 +717,67 @@ function UserProfile() {
                   </svg>
                 </div>
               )} */}
-            </div>
-            <div className="flex mb-[30px] gap-2 items-center">
-              <IoSettingsSharp size={30} className="text-white" />
-
-              {/* {!openPass ? ( */}
-              <div className="flex">
-                <p className="text-[22px] pl-2">Setting</p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  className="lucide lucide-pencil cursor-pointer ml-4"
-                >
-                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                  <path d="m15 5 4 4" />
-                </svg>
-                {/* <FaBirthdayCake size={30} className="text-white" /> */}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <div className="flex flex-col w-[526px] bg-[#676767] mt-[52px] text-[#fff] mb-24 rounded-lg">
+          <div className="mx-6">
+            <div>
+              <h2 className="text-[36px] text-[#fff]">Introduce</h2>
+              <hr />
+              <div className="flex">
+                <p type="text" className="text-[24px] inline-block w-[90%]">
+                  {userData?.introduction
+                    ? userData.introduction
+                    : "Update Introduction"}
+                </p>
+              </div>
+              <hr />
+            </div>
+            <div className="flex  my-[30px] items-center gap-2">
+              <PiBagSimpleFill
+                size={30}
+                className="text-white"
+                onClick={() => showModalInput("job")}
+              />
+              <div className="flex">
+                <p className="text-[22px] pl-2">
+                  {userData?.job ? userData.job : "Update Job"}
+                </p>
+              </div>
+            </div>
+            <div className="flex mb-[30px] gap-2 items-center">
+              <PiGenderIntersexFill size={33} className="text-white" />
+              <div className="flex">
+                <p className="text-[22px] pl-2">
+                  {userData?.gender || "Update Sex"}
+                </p>
+
+                {/* <PiGenderIntersexFill size={30} className="text-white" />; */}
+              </div>
+            </div>
+            <div className="flex mb-[30px] gap-2 items-center">
+              <FaTags size={30} className="text-white" />
+
+              <p className="text-[22px] pl-2">Manga-Action-Mystery</p>
+            </div>
+            <div className="flex mb-[30px] gap-2 items-center">
+              <FaBirthdayCake size={27} className="text-white" />
+
+              <div className="flex">
+                <p className="text-[22px] pl-2">
+                  {userData?.date_of_birth
+                    ? userData.date_of_birth
+                    : "Date of birth has not been set"}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div>
           <div className="text-6xl text-white mb-10">
             <Link to="">Recent Read Comics</Link>

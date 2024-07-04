@@ -14,9 +14,8 @@ const CardManga = ({
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
   const [pathName, setPathName] = useState("");
-  const chapterNumberReadMode = chapterLink ? chapterLink : "minhdz";
+  const chapterNumberReadMode = chapterLink ? chapterLink : "";
   // console.log("check link", chapterNumberReadMode);
-  console.log("chapter", path_segment);
   const getChapterFromUrl = (url) => {
     const parts = url.split("/");
     return parts[parts.length - 1];
@@ -51,9 +50,18 @@ const CardManga = ({
               //     ? getChapterFromUrl2(chapterNumberReadMode)
               //     : getChapterFromUrl(chapterNumberReadMode)
               // }`}
-              to={`/${sv}/chapter/${path_segment}/${getChapterFromUrl(
-                chapterNumberReadMode
-              )}`}
+              // to={`/${sv}/${
+              //   sv === 4 || sv === 11 ? "novel" : "chapter"
+              // }/${path_segment}/${getChapterFromUrl(chapterNumberReadMode)}`}
+              to={`/${sv}/${
+                sv === 4 || sv === 11
+                  ? `${chapterNumberReadMode === "" ? "chapter" : "novel"}`
+                  : "chapter"
+              }/${path_segment}/${
+                getChapterFromUrl(chapterNumberReadMode) === "None"
+                  ? ""
+                  : getChapterFromUrl(chapterNumberReadMode)
+              }`}
             >
               <p className="lg:text-[16px] 2xl:text-[18px] max-[435px]:text-[13px] leading-8 font-semibold  mt-3 max-[435px]:mt-1">
                 Chapter: {chapter}

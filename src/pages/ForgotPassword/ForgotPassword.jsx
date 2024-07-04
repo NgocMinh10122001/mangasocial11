@@ -3,9 +3,11 @@ import { Button, Form } from "antd";
 import axios from "axios";
 import * as message from "../../components/Message/Message";
 import { useNavigate } from "react-router-dom";
+import CustomizeSpin from "../../components/spin/CustomizeSpin";
 
 const ForgotPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
+   const [loading, setLoading] = useState(true)
 
   const navigate = useNavigate();
 
@@ -17,17 +19,24 @@ const ForgotPassword = () => {
     console.log("Success:", values);
     try {
       const response = await axios.post(
-        "https://apimanga.mangasocial.online/register",
+        "https://apimanga.mangasocial.online/forgot-password",
         values
       );
-      message.success("Signup is successfully");
+      message.success("Send is successfully");
       console.log(response);
-      navigate("/login1");
+      if (response) { 
+        setLoading(true)
+      navigate("/forgot-password-success");
+      }
+        setLoading(true)
+
     } catch (error) {
+      setLoading(true)
       message.error(`${error.response.data.message}`);
     }
   };
   const onFinishFailed = (errorInfo) => {
+    setLoading(true)
     console.log("Failed:", errorInfo);
   };
 
@@ -75,9 +84,9 @@ const ForgotPassword = () => {
       }}
     >
       <div className=" flex flex-col items-center justify-center md:w-[520px] md:h-[746px] rounded-[12px] gap-[31px] md:bg-[#242424] mt-[20px] md:mt-[100px] md:mb-[100px] px-[15px] md:px-[74px] py-[60px]">
-        <div className="font-semibold text-3xl text-white mb-4">SignUp</div>
+        <div className="font-semibold text-3xl text-white mb-4">Forgot password</div>
         <div className=" text-[14px] leading-[20px] md:text-[24px] md:leading-[28px] font-semibold text-white text-center">
-          Create a new accont our you can log in
+          A link with code to reset your password has been sent to your email.
         </div>
         <Form
           name="basic"
@@ -107,7 +116,7 @@ const ForgotPassword = () => {
 
           <div className="relative ">
             <Form.Item
-              name="password"
+              name="new_password"
               rules={[
                 {
                   validator: validatePassword, // Add this validator for password
@@ -116,10 +125,35 @@ const ForgotPassword = () => {
             >
               <input
                 id="password"
-                name="password"
+                name="new_password"
                 type={showPassword ? "text" : "password"}
                 className=" w-full bg-[#353434] h-[44px] rounded-[12px] p-[10px]  mb-1 mt-1 text-white placeholder-white placeholder-opacity-75"
-                placeholder="Password"
+                placeholder="New Password"
+              ></input>
+            </Form.Item>
+            
+            <img
+              src="/images/Login/icon.png"
+              className="h-[24px] w-[24px] absolute top-3 right-3 cursor-pointer"
+              alt=""
+              onClick={toggleShowPassword}
+            />
+          </div>
+          <div className="relative">
+            <Form.Item
+              name="confirm_password"
+              rules={[
+                {
+                  validator: validatePassword, // Add this validator for password
+                },
+              ]}
+            >
+              <input
+                id="confirm_password"
+                name="confirm_password"
+                type={showPassword ? "text" : "password"}
+                className=" w-full bg-[#353434] h-[44px] rounded-[12px] p-[10px]  mb-1 mt-1 text-white placeholder-white placeholder-opacity-75"
+                placeholder="New Password"
               ></input>
             </Form.Item>
             <img
@@ -130,28 +164,21 @@ const ForgotPassword = () => {
             />
           </div>
 
-          <Form.Item wrapperCol={{ span: 24 }} className="mt-1">
+          <Form.Item wrapperCol={{ span: 24 }} className="mt-1" onClick={() => setLoading(false)}>
             <Button
               type="primary"
               htmlType="submit"
               className="w-full h-[44px] rounded-[12px] p-[10px] bg-[#EA6016] focus:outline-none hover:bg-[#929292]  border-none "
             >
-              Sign Up
+              { loading ? "Send": <CustomizeSpin/>}
             </Button>
           </Form.Item>
         </Form>
-        <div className="flex items-center justify-center gap-0.5  ">
-          <div className="font-semibold text-[12px] leading-[16px] md:text-[16px] md:leading-[24px] text-white ">
-            By selecting “ SIGN IN”, you agree to
-          </div>
-          <div className="font-semibold text-[12px] leading-[16px] md:text-[16px] md:leading-[24px] text-[#EA6016] ">
-            OUR POLICIES
-          </div>
-        </div>
+        
 
         <div className="flex items-center justify-center gap-1.5 mt-40 md:mt-0">
           <div className="font-semibold text-[16px] leading-[24px] text-[#747474] ">
-            Already have an account?
+            Back to Login?
           </div>
           <div
             className="font-semibold text-[16px] leading-[24px] text-[#EA6016] "

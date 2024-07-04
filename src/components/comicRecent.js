@@ -22,7 +22,7 @@ const ComicRecent = () => {
               title={item?.title_manga}
               rate={item?.rate}
               update={item.time_release}
-              chapter={item.chapter_new}
+              chapter={item.chapter_new || item?.chaper_new}
               chapterLink={item.url_chapter}
               path_segment={
                 item?.path_segment_manga

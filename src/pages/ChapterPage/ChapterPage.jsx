@@ -486,7 +486,7 @@ const ChapterPage = () => {
                             onChange={(e) => commentOnchange(e)}
                           ></input>
                           <button
-                            className="bg-slate-500 rounded-lg m-2 w-[20%] text-white font-semibold"
+                            className={ `${comment !== "" ? "bg-slate-500 hover:cursor-pointer":"bg-slate-700 hover:cursor-not-allowed"} rounded-lg m-2 w-[20%] text-white font-semibold`}
                             onClick={() => handleSendComment()}
                           >
                             Comment

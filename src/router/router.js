@@ -30,6 +30,8 @@ import SignUpSuccess from "../pages/SignUp/SignUpSuccess";
 import NovelPage2 from "../pages/NovelPage/NovelPage2";
 import NovelPageGenre from "../pages/Novel/NovelPageGenre";
 import ReadChapter2 from "../pages/ReadChapter/ReadChapter2";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
+import ForgotPassSuccess from "../pages/ForgotPassword/ForgotPassSuccess";
 
 // console.log("check sv di ko", sv);
 const router = createBrowserRouter([
@@ -150,8 +152,16 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
+  },
+  {
     path: "/sign-up-success",
     element: <SignUpSuccess />,
+  },
+  {
+    path: "/forgot-password-success",
+    element: <ForgotPassSuccess />,
   },
   {
     path: "/test",

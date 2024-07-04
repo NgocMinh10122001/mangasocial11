@@ -55,6 +55,8 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
         navigate(`/${sv}`);
       }
     } catch (error) {
+      setLoading(true)
+      message.error("Please provide a valid email address and password. If you continue to have issues logging into your account");
       console.log(error);
     }
   };
@@ -202,11 +204,11 @@ const token = Buffer.from(`dooxxinhgai@gmail.com:12345678`, 'utf8').toString('ba
             </div>
           </div>
 
-          <div>
+          <Link to="/forgot-password">
             <h1 className="text-[#EA6016] cursor-pointer hover:underline hover:font-extrabold text-base max-[435px]:text-sm max-[435px]:font-semibold">
               Forgot Password?
             </h1>
-          </div>
+          </Link>
 
           <div className="flex items-center gap-3 max-[435px]:hidden">
             <img

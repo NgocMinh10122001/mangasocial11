@@ -22,11 +22,13 @@ const NovelCard2 = ({ poster, title, rate, update, chapter, path_segment }) => {
             <p className="text-[#FFFFFF] lg:text-[16px] 2xl:text-[18px] leading-10 font-semibold overflow-hidden whitespace-normal w-[200px]">
               {title}
             </p>
-            <NavLink to={`/${sv}/novel2/${path_segment}/${chapter}`}>
+            <div
+            // to={`/${sv}/novel2/${path_segment}/${chapter}`}
+            >
               <p className="lg:text-[16px] 2xl:text-[18px] leading-8 font-semibold mt-3">
                 Chapter: {chapter}
               </p>
-            </NavLink>
+            </div>
           </div>
           <div className="flex items-center gap-[12px]">
             <img className="w-5 h-5" src="/images/star.png" alt="" />
