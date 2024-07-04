@@ -70,10 +70,7 @@ const NewRelease = () => {
               chapterLink={item.url_chapter || item?.id_chapter}
               path_segment={
                 item?.url_chapter
-                  ? item?.url_manga.replace(
-                      `https://apimanga.mangasocial.online/web/rmanga/${sv}/`,
-                      ""
-                    )
+                  ? getChapterFromUrl(item?.id_manga || item?.url_manga)
                   : getChapterFromUrl2(item.link_server_novel)
               }
             />
