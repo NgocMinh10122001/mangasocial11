@@ -31,22 +31,36 @@ function UserProfile() {
   console.log("check id", sessionStorage.getItem("user_id"));
   const onFinish = async (values) => {
     try {
-      const response = await axios.post(
-        `https://apimanga.mangasocial.online//${sessionStorage.getItem(
-          "user_id"
-        )}/setting/password`,
-        values
-      );
-      message.success(`Update password is successfully, You have successfully registered for a mangasocial account. Please log in to your email, search for the verify account email to activate it, if not found, go to spam to search
+      if (values.new_password === values.confirm_password) {
+        const response = await axios.post(
+          `https://apimanga.mangasocial.online/${sessionStorage.getItem(
+            "user_id"
+          )}/setting/password`,
+          values
+        );
+
+        if (response && response.data) {
+          message.success(`Update password is successfully, You have successfully registered for a mangasocial account. Please log in to your email, search for the verify account email to activate it, if not found, go to spam to search
 `);
-      console.log("check res", response);
 
-      //   if (response && response.data) {
-      // handleCancel();
-
-      //    }
+          handleCancel();
+        } else {
+          message.error(`password is wrong, try again!
+`);
+        }
+      } else {
+        message.error(
+          "New password and confirmation password are not in async, please try again!"
+        );
+      }
     } catch (error) {
-      message.error(`${error.response.data.message}`);
+      message.error(
+        `${
+          error.response.data.message
+            ? error.response.data.message
+            : "Password is wrong, try again!"
+        }`
+      );
     }
   };
   const onFinishFailed = (errorInfo) => {
@@ -637,7 +651,7 @@ function UserProfile() {
                         >
                           <Form.Item
                             label="Current Password"
-                            name="current_username"
+                            name="current_password"
                             rules={[
                               {
                                 required: true,

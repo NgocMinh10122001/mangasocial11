@@ -18,15 +18,21 @@ const ForgotPassword = () => {
   const onFinish = async (values) => {
     console.log("Success:", values);
     try {
-      const response = await axios.post(
-        "https://apimanga.mangasocial.online/forgot-password",
-        values
-      );
-      message.success("Send is successfully");
-      console.log(response);
-      if (response) { 
+      if (values.new_password === values.confirm_password) {
+        const response = await axios.post(
+          "https://apimanga.mangasocial.online/forgot-password",
+          values
+        );
+        message.success("Send is successfully");
+        console.log(response);
+        if (response) {
+          setLoading(true)
+          navigate("/forgot-password-success");
+        }
+      }
+      else { 
+        message.error("New password and confirmation password are not in async, please try again!");
         setLoading(true)
-      navigate("/forgot-password-success");
       }
         setLoading(true)
 

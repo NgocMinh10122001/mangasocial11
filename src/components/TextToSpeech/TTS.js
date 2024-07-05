@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { useSpeech } from "react-text-to-speech";
 
 export default function App({ content }) {
-    const [voice, setVoice] = useState(null);
-  const [pitch, setPitch] = useState(1);
-  const [rate, setRate] = useState(1);
+  const [voice, setVoice] = useState("Aaron");
+  const [pitch, setPitch] = useState(1.1);
+  const [rate, setRate] = useState(1.2);
   const [volume, setVolume] = useState(1);
+
   const handleVoiceChange = (event) => {
     const voices = window.speechSynthesis.getVoices();
     // setVoice(voices.find((v) => v.name === event.target.value));
-    setVoice(event.target.value)
+    setVoice(event.target.value);
   };
+
+  console.log("check voice", voice);
 
   const handlePitchChange = (event) => {
     setPitch(parseFloat(event.target.value));
@@ -31,16 +34,16 @@ export default function App({ content }) {
     ),
     highlightText: true,
     highlightProps: { style: { color: "white", backgroundColor: "blue" } },
-    voiceURI:voice,
-    volume:volume,
-    rate:rate,
-    pitch:pitch
+    voiceURI: voice,
+    volume: volume,
+    rate: rate,
+    pitch: pitch,
   });
 
   return (
     <div style={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}>
       <div className="flex gap-2 justify-center items-center">
-      <label className="text-white">
+        <label className="text-white">
           Pitch:
           <input
             type="range"
@@ -87,22 +90,93 @@ export default function App({ content }) {
             onChange={handleVoiceChange}
             className="text-white bg-[#138e00]"
           >
-            {window.speechSynthesis.getVoices().map((voice) => (
-              <option key={voice.name} value={voice.name}>
-                {voice.name}
-              </option>
-            ))}
+            {window.speechSynthesis.getVoices().map((voice) => {
+              if (
+                voice.name === "Aaron" ||
+                voice.name === "Arthur" ||
+                voice.name === "Catherine" ||
+                voice.name === "Daniel (Tiếng Anh (Vương quốc Anh))" ||
+                voice.name === "Fred" ||
+                voice.name === "Gordon" ||
+                voice.name === "Karen" ||
+                voice.name === "Martha" ||
+                voice.name === "Melina" ||
+                voice.name === "Moira" ||
+                voice.name === "Nicky" ||
+                voice.name === "Tessa"
+              ) {
+                return (
+                  <option key={voice.name} value={voice.name}>
+                    {voice.name}
+                  </option>
+                );
+              }
+            })}
           </select>
         </label>
         <br />
         {speechStatus !== "started" ? (
-          <button className="text-white bg-[#138e00] p-2 rounded-lg " onClick={start}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <button
+            className="text-white bg-[#138e00] p-2 rounded-lg "
+            onClick={start}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-play"
+            >
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
           </button>
         ) : (
-          <button className="text-white bg-[#138e00] p-2 rounded-lg " onClick={pause}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pause"><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg></button>
+          <button
+            className="text-white bg-[#138e00] p-2 rounded-lg "
+            onClick={pause}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-pause"
+            >
+              <rect width="4" height="16" x="6" y="4" />
+              <rect width="4" height="16" x="14" y="4" />
+            </svg>
+          </button>
         )}
-        <button className="text-white bg-[#138e00] p-2 rounded-lg " onClick={stop}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stop-circle"><circle cx="12" cy="12" r="10"/><rect width="6" height="6" x="9" y="9"/></svg></button>
+        <button
+          className="text-white bg-[#138e00] p-2 rounded-lg "
+          onClick={stop}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-stop-circle"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <rect width="6" height="6" x="9" y="9" />
+          </svg>
+        </button>
       </div>
       <Text />
     </div>
