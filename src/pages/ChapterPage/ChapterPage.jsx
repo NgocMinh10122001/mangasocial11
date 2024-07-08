@@ -107,7 +107,7 @@ const ChapterPage = () => {
   useEffect(() => {
     fetchChapterDetail();
     fetchListComment()
-  }, []);
+  }, [slug]);
 
   const handleSeeMore = () => {
     setVisibleChapterCount((prevCount) => prevCount + 10);

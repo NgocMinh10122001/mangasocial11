@@ -9,6 +9,7 @@ const ToggleReadMode = () => {
 
   const sv = useSelector((state) => state.server.sv);
   const readmode = useSelector((state) => state.ReadMode.readmode);
+  console.log("check read mode", readmode);
   const id_user = () => {
     if (sessionStorage.getItem("user_id") == null) {
       return 0;
@@ -17,19 +18,14 @@ const ToggleReadMode = () => {
   console.log("check wth", id_user());
   const getDataRead = async () => {
     try {
-      await axios.get(
-        "http://apimanga.mangasocial.online/" + sv + "/manga/" + id_user() + "/"
-      );
       const res = await axios.get(
         "http://apimanga.mangasocial.online/mode/web-server/" + id_user() + "/"
       );
-      console.log(res);
       const res2 = await axios.get(
         "http://apimanga.mangasocial.online/mode/get-web-server/" +
           id_user() +
           "/"
       );
-      console.log(res2.data.msg);
       if (res2.data.msg === "on") {
         dispatch(changeReadMode(true));
       } else {
@@ -52,27 +48,11 @@ const ToggleReadMode = () => {
     }
   };
 
-  //   const getDataRead = () => {
-  //     fetch("apimanga.mangasocial.online/1/manga", {
-  //       method: "GET",
-  //     })
-  //     //   .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log(data);
-  //       })
-  //       .catch((error) => console.log(error));
-  //   };
-  //   const checkReadMode = async () => {
-  //     fetch("http://apimanga.mangasocial.online/mode/get-web-server/").then(
-  //       (data) => console.log(data)
-  //     );
-  //   };
   const handleReadMode = () => {
     getDataRead();
     checkReadMode();
-
-    // setReadMode(readMode);
   };
+
   return (
     <>
       <div
@@ -80,8 +60,8 @@ const ToggleReadMode = () => {
           id_user() !== 0 ? "" : "hidden"
         } w-40 h-40 rounded-full flex flex-col gap-2 justify-center items-center fixed bottom-20 right-4 z-100`}
       >
-        <p>Read Mode: {readmode == true ? "On" : "Off"}</p>
-        {readmode == true ? (
+        <p>Read Mode: {readmode ? "On" : "Off"}</p>
+        {readmode ? (
           <input
             type="checkbox"
             id="switch"

@@ -15,13 +15,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Handle_function from "../handle_account/handle";
 // import { IoLogoAndroid } from "react-icons/io";
 import { LiaFlagUsaSolid } from "react-icons/lia";
-import JP from "country-flag-icons/react/3x2/JP";
-import US from "country-flag-icons/react/3x2/US";
-import VN from "country-flag-icons/react/3x2/VN";
-import AC from "country-flag-icons/react/3x2/AC";
-import IC from "country-flag-icons/react/3x2/IC";
-import EU from "country-flag-icons/react/3x2/EU";
-import XK from "country-flag-icons/react/3x2/XK";
+import GB from "country-flag-icons/react/3x2/GB";
+import SA from "country-flag-icons/react/3x2/SA";
+import DE from "country-flag-icons/react/3x2/DE";
+import BR from "country-flag-icons/react/3x2/BR";
+import ES from "country-flag-icons/react/3x2/ES";
+import IT from "country-flag-icons/react/3x2/IT";
 import RU from "country-flag-icons/react/3x2/RU";
 import FR from "country-flag-icons/react/3x2/FR";
 import { useNavigate } from "react-router-dom";
@@ -72,8 +71,8 @@ export default function Layout() {
       sv: 0,
       name: "mangainn.net",
       icon: (
-        <US
-          title="Vietnamese"
+        <GB
+          title="England"
           className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5 "
         />
       ),
@@ -82,9 +81,9 @@ export default function Layout() {
       sv: 1,
       name: "ww5.manganelo.tv",
       icon: (
-        <JP
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        <GB
+          title="England"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5 "
         />
       ),
     },
@@ -92,8 +91,8 @@ export default function Layout() {
       sv: 2,
       name: "mangareader.cc",
       icon: (
-        <JP
-          title="Vietnamese"
+        <GB
+          title="England"
           className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5 "
         />
       ),
@@ -102,9 +101,9 @@ export default function Layout() {
       sv: 3,
       name: "ninemanga.com",
       icon: (
-        <JP
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        <GB
+          title="England"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5 "
         />
       ),
     },
@@ -112,9 +111,9 @@ export default function Layout() {
       sv: 4,
       name: "bestlightnovel.com",
       icon: (
-        <XK
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        <GB
+          title="England"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5 "
         />
       ),
     },
@@ -122,9 +121,9 @@ export default function Layout() {
       sv: 5,
       name: "mangajar.com/manga",
       icon: (
-        <EU
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        <GB
+          title="England"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5 "
         />
       ),
     },
@@ -132,9 +131,9 @@ export default function Layout() {
       sv: 6,
       name: "mangakomi.io",
       icon: (
-        <US
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        <GB
+          title="England"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5 "
         />
       ),
     },
@@ -142,9 +141,9 @@ export default function Layout() {
       sv: 7,
       name: "readm.org",
       icon: (
-        <EU
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        <GB
+          title="England"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5 "
         />
       ),
     },
@@ -157,37 +156,28 @@ export default function Layout() {
       sv: 9,
       name: "swatmanga.com",
       icon: (
-        <EU
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
-        />
+        <SA title="SA" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />
       ),
     },
     {
       sv: 10,
       name: "mangajar.com",
       icon: (
-        <JP
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
-        />
+        <RU title="RU" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />
       ),
     },
     {
       sv: 11,
       name: "novelhall.com",
       icon: (
-        <JP
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
-        />
+        <GB title="GB" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />
       ),
     },
     {
       sv: 12,
       name: "mto.com",
       icon: (
-        <JP
+        <GB
           title="Vietnamese"
           className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
         />
@@ -197,20 +187,14 @@ export default function Layout() {
       sv: 13,
       name: "de.ninemanga.com",
       icon: (
-        <JP
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
-        />
+        <DE title="DE" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />
       ),
     },
     {
       sv: 14,
       name: "br.ninemanga.com",
       icon: (
-        <JP
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
-        />
+        <BR title="BR" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />
       ),
     },
     {
@@ -227,43 +211,35 @@ export default function Layout() {
       sv: 16,
       name: "es.ninemanga.com",
       icon: (
-        <JP
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
-        />
+        <ES title="ES" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />
       ),
     },
     {
       sv: 17,
       name: "fr.ninemanga.com",
       icon: (
-        <FR
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
-        />
+        <FR title="FR" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />
       ),
     },
     {
       sv: 18,
       name: "it.ninemanga.com",
       icon: (
-        <US
-          title="Vietnamese"
-          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
-        />
+        <IT title="IT" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />
       ),
     },
     // {
     //   sv: 19,
     //   name: "azoranov.com/series/",
-    //   icon: <US title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />,
+    //   icon: <GB title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />,
     // },
   ];
-
   const dispatch = useDispatch();
-  function test() {
-    console.log("sv:", sv);
-  }
+  const getChapterFromUrl = (url) => {
+    const parts = url.split("/");
+    return parts[parts.length - 1];
+  };
+
   const handleOpen = () => {
     setOpen(!open);
   };
@@ -398,6 +374,7 @@ export default function Layout() {
     dispatch(changeServer(index));
     this.forceUpdate();
   }
+
   return (
     <>
       <div className="header-top max-[435px]:hidden">
@@ -597,11 +574,19 @@ export default function Layout() {
                       src={item.poster}
                       alt=""
                     />
-                    <div
-                      to={"/" + sv + `/chapter/` + arr_path[index]}
-                      onClick={() =>
-                        navigate("/ + sv + /chapter/" + arr_path[index])
-                      }
+                    <Link
+                      to={`/${sv}/chapter/${
+                        item?.id_manga.includes(".html")
+                          ? getChapterFromUrl(
+                              item?.id_manga.replace(".html", "")
+                            )
+                          : item?.id_manga.replace(
+                              `https://${
+                                new URL(`${item?.id_manga}`).hostname
+                              }/manga/`,
+                              ""
+                            )
+                      }`}
                       className="flex"
                     >
                       <div className="text-lg flex flex-col ml-6 justify-center">
@@ -609,7 +594,7 @@ export default function Layout() {
                         <div>Rate:{item.rate}</div>
                         <div>Views: {item.views}</div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))
               ) : (
@@ -675,16 +660,25 @@ export default function Layout() {
                     key={index}
                     className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  "
                   >
+                    {console.log("check search", item)}
                     <img
                       className="w-1/3 h-[69%] py-2 rounded-lg"
                       src={item.poster}
                       alt=""
                     />
-                    <div
-                      to={"/" + sv + `/chapter/` + arr_path[index]}
-                      onClick={() =>
-                        navigate("/ + sv + /chapter/" + arr_path[index])
-                      }
+                    <Link
+                      to={`/${sv}/chapter/${
+                        item?.id_manga.includes(".html")
+                          ? getChapterFromUrl(
+                              item?.id_manga.replace(".html", "")
+                            )
+                          : item?.id_manga.replace(
+                              `https://${
+                                new URL(`${item?.id_manga}`).hostname
+                              }/manga/`,
+                              ""
+                            )
+                      }`}
                       className="flex"
                     >
                       <div className="text-lg flex flex-col ml-6 justify-center">
@@ -692,7 +686,7 @@ export default function Layout() {
                         <div>Rate:{item.rate}</div>
                         <div>Views: {item.views}</div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))
               ) : (
