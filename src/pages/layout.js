@@ -228,11 +228,16 @@ export default function Layout() {
         <IT title="IT" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />
       ),
     },
-    // {
-    //   sv: 19,
-    //   name: "azoranov.com/series/",
-    //   icon: <GB title="Vietnamese" className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5" />,
-    // },
+    {
+      sv: 19,
+      name: "https://azoramoon.com",
+      icon: (
+        <GB
+          title="Vietnamese"
+          className="max-[435px]:h-5 max-[435px]:w-5 h-5 w-5"
+        />
+      ),
+    },
   ];
   const dispatch = useDispatch();
   const getChapterFromUrl = (url) => {
