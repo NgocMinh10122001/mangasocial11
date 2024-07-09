@@ -112,35 +112,7 @@ const ChapterPage = () => {
   const handleSeeMore = () => {
     setVisibleChapterCount((prevCount) => prevCount + 10);
   };
-
-  const sortedChapters = Object.keys(listChapter).sort((a, b) => {
-    // Lấy 3 số sau ký tự "chapter-"
-    const getLastNumber = (url) =>
-      parseInt(
-        url.slice(url.indexOf("chapter-") + 8, url.indexOf("chapter-") + 11),
-        10
-      );
-
-    const chapterNumberA = getLastNumber(a);
-
-    const chapterNumberB = getLastNumber(b);
-
-    return chapterNumberA - chapterNumberB;
-  });
-
-  const arrChapterLink = Object.keys(listChapter);
-
-
-
-
-  const linkList = arrChapterLink.map(function (link) {
-    return listChapter[link];
-  });
-
-
-
-
-    const getChapterFromUrl = (url) => {
+const getChapterFromUrl = (url) => {
     const parts = url.split('/');
     return parts[parts.length - 1];
   };
@@ -148,6 +120,42 @@ const ChapterPage = () => {
     const parts = url.split('/');
     return parts[parts.length - 2];
    };
+  
+  const test = readmode ? Object.fromEntries(
+    Object.entries(listChapter).sort((a, b) => {
+      const numA = a[1].includes("chapter-") ? a[1]?.match(/chapter-([\d.]+)/)[1]?.split('.')?.map(Number) : a[1].match(/(\d+)\/$/)[1] || "";
+      const numB =b[1].includes("chapter-") ? b[1]?.match(/chapter-([\d.]+)/)[1]?.split('.')?.map(Number) :b[1].match(/(\d+)\/$/)[1] || "";
+     
+      const numA2 = a[1].includes("chapter_") ? a[1]?.match(/chapter_([\d.]+)/)[1]?.split('.')?.map(Number) : a[1].match(/(\d+)\/$/)[1] || "";
+      const numB2 = b[1].includes("chapter_") ? b[1]?.match(/chapter_([\d.]+)/)[1]?.split('.')?.map(Number):b[1].match(/(\d+)\/$/)[1] || "";
+    
+      
+      // const chapterA = a[1].includes("chapter-")? parseInt( numA ) : parseInt( a[1].match(/(\d+)\/$/)[1])
+      //     const chapterB =  b[1].includes("chapter-")? parseInt( numB ) : parseInt( b[1].match(/(\d+)\/$/)[1])
+      const chapterA = parseInt(a[1].includes("chapter-")?numA:numA2);
+          const chapterB = parseInt(b[1].includes("chapter-")?numB:numB2);
+      return chapterA - chapterB;
+    })
+  ) : {};
+  const sortedChapters = readmode ? Object.values(test) : listChapter.sort((a, b) => {
+    const chapterA = parseFloat(a.includes("chapter") ? a.includes("novel")?  a.match(/chapter-([\d.]+)/) : a.match(/chapter-([\d.]+)/)[1] : getChapterFromUrl(a));
+    const chapterB = parseFloat(b.includes("chapter") ? b.includes("novel")? b.match(/chapter-([\d.]+)/) :b.match(/chapter-([\d.]+)/)[1] : getChapterFromUrl(b));
+    return chapterA - chapterB;
+  });
+  
+  const arrChapterLink = sortedChapters
+ 
+
+
+
+  const linkList = arrChapterLink.map(function (link) {
+    return link;
+  });
+
+
+
+
+    
   
   const viewsString = chapterDetail?.views || "";
   const startIndex = viewsString.lastIndexOf("has ") + 4;
@@ -430,7 +438,7 @@ const ChapterPage = () => {
                           { console.log("chapter genre", chapterDetail)}
                           <ChapterCard
                             chapterLink={item}
-                            chapterName={readmode? arrChapterLink[index]: getChapterFromUrl(item)}
+                            chapterName={readmode? Object.keys(test)[index]: `Chapter ${index +1}`}
                             title={chapterDetail?.title || chapterDetail?.title_novel}
                             des={chapterDetail?.description}
                             poster={chapterDetail?.poster}

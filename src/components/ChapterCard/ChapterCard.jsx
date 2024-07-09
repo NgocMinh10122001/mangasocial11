@@ -38,7 +38,7 @@ const ChapterCard = ({ chapter, title, poster, des, slug, chapterLink,chapterNam
               />
               <div>
                 <div className="text-[24px] font-semibold leading-[32px] text-white ">
-                  {`${title} - ${chapterName} `}
+                  {readmode ?`${chapterName}` :`${title} - ${chapterName} `}
                 </div>
                 <div className="text-[22px] font-semibold leading-[28px] text-white ">
                   12/07/2023

@@ -18,9 +18,11 @@ const NovelPage = () => {
   const [showTab, setShowTab] = useState(true);
   const [chapterDetail, setChapterDetail] = useState([]);
   const [chapterData, setChapterData] = useState("");
-  // console.log("check chapter", chapterData);
+  const [commentDetail, setCommentDetail] = useState([]);
   const [subTitle, setSubTitle] = useState("");
-  const [listChap, setListChap] = useState("");
+  const [listChap, setListChap] = useState([]);
+  console.log("check list", listChap);
+
   const [visibleChapterCount, setVisibleChapterCount] = useState(12);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [comment, setComment] = useState("");
@@ -37,13 +39,6 @@ const NovelPage = () => {
   const text =
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora delectus maiores dolores iste in autem accusantium corrupti dolorum ex molestias aut magni voluptates obcaecati esse, impedit, nam numquam repudiandae recusandae!";
 
-  // const handleChapter = () => {
-  //   let selectChapter = document.getElementById("chapterList");
-  //   let selectedChapter =
-  //     selectChapter.options[selectChapter.selectedIndex].value;
-  // fetchChapterContent(selectedChapter);
-  //   setCurrentChap(selectedChapter);
-  // };
   const getChapterFromUrl = (url) => {
     const parts = url.split("/");
     return parts[parts.length - 1];
@@ -66,7 +61,6 @@ const NovelPage = () => {
       let selectChapter = document.getElementById("chapterList");
       let selectedChapter =
         selectChapter.options[selectChapter.selectedIndex].value;
-      console.log("check cc", selectedChapter);
       // setChooseChapter(e.target.value);
       const linkChapter = getChapterFromUrl(selectedChapter);
 
@@ -74,6 +68,69 @@ const NovelPage = () => {
       fetchChapterContent(selectedChapter);
     }
   };
+
+  const test = readmode
+    ? Object.fromEntries(
+        Object.entries(chapterDetail?.chapters || {}).sort((a, b) => {
+          const numA = a[1].includes("chapter-")
+            ? a[1]
+                ?.match(/chapter-([\d.]+)/)[1]
+                ?.split(".")
+                ?.map(Number)
+            : a[1].match(/(\d+)\/$/)[1] || "";
+          const numB = b[1].includes("chapter-")
+            ? b[1]
+                ?.match(/chapter-([\d.]+)/)[1]
+                ?.split(".")
+                ?.map(Number)
+            : b[1].match(/(\d+)\/$/)[1] || "";
+
+          const numA2 = a[1].includes("chapter_")
+            ? a[1]
+                ?.match(/chapter_([\d.]+)/)[1]
+                ?.split(".")
+                ?.map(Number)
+            : a[1].match(/(\d+)\/$/)[1] || "";
+          const numB2 = b[1].includes("chapter_")
+            ? b[1]
+                ?.match(/chapter_([\d.]+)/)[1]
+                ?.split(".")
+                ?.map(Number)
+            : b[1].match(/(\d+)\/$/)[1] || "";
+
+          // const chapterA = a[1].includes("chapter-")? parseInt( numA ) : parseInt( a[1].match(/(\d+)\/$/)[1])
+          //     const chapterB =  b[1].includes("chapter-")? parseInt( numB ) : parseInt( b[1].match(/(\d+)\/$/)[1])
+          const chapterA = parseInt(a[1].includes("chapter-") ? numA : numA2);
+          const chapterB = parseInt(b[1].includes("chapter-") ? numB : numB2);
+          return chapterA - chapterB;
+        })
+      )
+    : {};
+  const sortedChapters = readmode
+    ? Object.values(test)
+    : listChap.sort((a, b) => {
+        const chapterA = parseFloat(
+          a.includes("chapter")
+            ? a.includes("novel")
+              ? a.match(/chapter-([\d.]+)/)
+              : a.match(/chapter-([\d.]+)/)[1]
+            : getChapterFromUrl(a)
+        );
+        const chapterB = parseFloat(
+          b.includes("chapter")
+            ? b.includes("novel")
+              ? b.match(/chapter-([\d.]+)/)
+              : b.match(/chapter-([\d.]+)/)[1]
+            : getChapterFromUrl(b)
+        );
+        return chapterA - chapterB;
+      });
+
+  const arrChapterLink = sortedChapters;
+  const linkList = arrChapterLink.map(function (link) {
+    return link;
+  });
+  console.log("check link", linkList);
 
   const nextChap = () => {
     let indexOfCurrentChap = listChap.indexOf(currentChap);
@@ -135,13 +192,11 @@ const NovelPage = () => {
   };
 
   const fetchChapterContent = async (link_novel) => {
-    console.log("check link", link_novel);
     const res = await axios.get(link_novel);
     setChapterData(res.data);
-    let content = res.data.content || res.data.content_chapter;
-    let first = content.indexOf("Chapter" || "");
-    let last = content.indexOf("Chapter" || "", first + 1);
-    setSubTitle(content.substring(first + 10, last));
+    let content = res.data.chapter_name || res.data.title_chapter;
+
+    setSubTitle(content);
   };
 
   const handleShowTab = () => {
@@ -156,13 +211,15 @@ const NovelPage = () => {
         `https://apimanga.mangasocial.online/cmanga/${slug}/${user_id}/`,
         { content: comment }
       );
-      console.log("response:", res);
-      console.log("comment:", comment);
-    } catch (error) {
-      console.log(error);
-      console.log("comment:", comment);
-      console.log(slug);
-    }
+      if (res) {
+        let resc = await axios.get(
+          `https://apimanga.mangasocial.online/cmanga/${slug}`
+        );
+        setComment("");
+
+        if (resc) setCommentDetail(resc.data);
+      }
+    } catch (error) {}
   };
   const fetchChapterDetail = async () => {
     try {
@@ -191,12 +248,19 @@ const NovelPage = () => {
       console.log("slug:", slug);
     }
   };
+  const fetchListComment = async () => {
+    let resc = await axios.get(
+      `https://apimanga.mangasocial.online/cmanga/${slug}`
+    );
+    if (resc) setCommentDetail(resc.data);
+  };
   useEffect(() => {
     if (readmode) {
       fetchChapterDetail();
       fetchChapterContent(
         `https://apimanga.mangasocial.online/web/rnovel/${sv}/${slug}/${chapter}`
       );
+      fetchListComment();
       setCurrentChap(
         `https://apimanga.mangasocial.online/web/rnovel/${sv}/${slug}/${chapter}/`
       );
@@ -205,6 +269,7 @@ const NovelPage = () => {
       fetchChapterContent(
         `https://apimanga.mangasocial.online/rnovel/${slug}/${chapter}`
       );
+      fetchListComment();
       setCurrentChap(
         `https://apimanga.mangasocial.online/rnovel/${slug}/${chapter}`
       );
@@ -357,33 +422,7 @@ const NovelPage = () => {
             {/* server && button */}
             <div className="flex flex-col gap-[40px]">
               {/* button */}
-              <div className="flex  gap-5">
-                <button className=" p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px]  bg-[#FF2020]  text-white md:rounded-[67px] ">
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] ">
-                    Read now
-                  </div>
-                </button>
-                <button className=" p-[8px]  rounded-[12px] text-black md:px-[52px] md:py-[26px]   bg-[#496EF1]  md:text-white md:rounded-[67px]">
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 ">
-                    <div> My List </div>
-                    <img
-                      src="/images/ChapterPage/uil_plus.png"
-                      alt=""
-                      className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover "
-                    />
-                  </div>
-                </button>
-                <button className=" p-[8px]  rounded-[12px] md:px-[52px] md:py-[26px] bg-[#F45F17]  text-white md:rounded-[67px]">
-                  <div className="font-bold text-[12px] leading-[16px] md:text-[36px] md:leading-[44px] flex gap-1 md:gap-3 ">
-                    <div>{chapterDetail[0]?.rate}</div>
-                    <img
-                      src="/images/ChapterPage/Star 3.png"
-                      className="h-[20px] w-[20px] md:h-[48px] md:w-[48px] bg-cover object-cover"
-                      alt=""
-                    />
-                  </div>
-                </button>
-              </div>
+
               {/* chọn server */}
               <div className="flex flex-col gap-[10px]">
                 <div className=" font-bold text-[12px] leading-[16px]  md:text-[28px] md:leading-[36px] text-white ">
@@ -466,7 +505,7 @@ const NovelPage = () => {
               <h1 className="text-6xl text-white ">
                 {chapterDetail[0]?.title}
               </h1>
-              <h3 className="text-3xl text-gray-400 pt-4">
+              <h3 className="text-2xl text-gray-400 pt-4 uppercase">
                 <span>{subTitle}</span>
               </h3>
             </div>
@@ -475,7 +514,6 @@ const NovelPage = () => {
                 className="bg-[#138e00] h-10 px-4 flex items-center text-lg rounded-lg text-white w-50"
                 onClick={prevChap}
               >
-                {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -496,42 +534,17 @@ const NovelPage = () => {
               <select
                 name="chapterList"
                 id="chapterList"
-                className="bg-[#138e00] w-[200px] rounded-lg text-white justify-center"
+                className="bg-[#138e00] w-[200px] rounded-lg text-white justify-center uppercase"
                 value={currentChap}
                 onChange={() => handleChapter()}
               >
-                {chapterDetail[0] ? (
-                  <>
-                    {chapterDetail[0]?.chapters?.map((item, index) => (
-                      <option value={item} key={index + 1}>
-                        {/* {item.replace(
-                      "http://apimanga.mangasocial.online/rnovel/" + slug + "/",
-                      ""
-                    )} */}
-                        {`Chapter_${index + 1}`}
-                      </option>
-                    ))}
-                  </>
-                ) : (
-                  <>
-                    {Object.values(chapterDetail?.chapters || "").map(
-                      (item, index) => (
-                        <>
-                          {/* {console.log("check cc2", item)} */}
-                          <option value={item} key={index + 1}>
-                            {/* {item.replace(
-                      "http://apimanga.mangasocial.online/rnovel/" + slug + "/",
-                      ""
-                    )} */}
-                            {`${
-                              Object.keys(chapterDetail?.chapters || "")[index]
-                            }`}
-                          </option>
-                        </>
-                      )
-                    )}
-                  </>
-                )}
+                {linkList.map((item, index) => (
+                  <option value={item} key={index + 1} className="uppercase">
+                    {readmode
+                      ? Object.keys(test)[index]
+                      : getChapterFromUrl(item)}
+                  </option>
+                ))}
               </select>
 
               <button
@@ -570,7 +583,7 @@ const NovelPage = () => {
       <div className="flex justify-center bg-black h-[1000vh]">
         {!showTab && (
           <div className="flex flex-col">
-            <CMT_list cmt_arr={chapterDetail[0].comments} />
+            <CMT_list cmt_arr={commentDetail || []} />
             {/* logined user comment */}
             {sessionStorage.getItem("user_email") ? (
               <div>

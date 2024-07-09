@@ -88,16 +88,27 @@ const ReadChapter = () => {
           `https://apimanga.mangasocial.online/web/rmanga/${sv}/${slug}/`
         );
       // console.log("check rs", response.data.chapters);
+       const test = readmode
+    ? Object.fromEntries(
+        Object.entries(response.data.chapters || {}).sort((a, b) => {
+         const numA = a[1].includes("chapter-") ? a[1]?.match(/chapter-([\d.]+)/)[1]?.split('.')?.map(Number) : a[1].match(/(\d+)\/$/)[1] || "";
+      const numB =b[1].includes("chapter-") ? b[1]?.match(/chapter-([\d.]+)/)[1]?.split('.')?.map(Number) :b[1].match(/(\d+)\/$/)[1] || "";
+     
+      const numA2 = a[1].includes("chapter_") ? a[1]?.match(/chapter_([\d.]+)/)[1]?.split('.')?.map(Number) : a[1].match(/(\d+)\/$/)[1] || "";
+      const numB2 = b[1].includes("chapter_") ? b[1]?.match(/chapter_([\d.]+)/)[1]?.split('.')?.map(Number):b[1].match(/(\d+)\/$/)[1] || "";
+    
       
-      
-        const arrValues = Object.values(response.data.chapters);
-        const arrKeys = Object.keys(response.data.chapters);
-
-        
-
-      // console.log("check rs",keys);
-
-
+      // const chapterA = a[1].includes("chapter-")? parseInt( numA ) : parseInt( a[1].match(/(\d+)\/$/)[1])
+      //     const chapterB =  b[1].includes("chapter-")? parseInt( numB ) : parseInt( b[1].match(/(\d+)\/$/)[1])
+      const chapterA = parseInt(a[1].includes("chapter-")?numA:numA2);
+          const chapterB = parseInt(b[1].includes("chapter-")?numB:numB2);
+      return chapterA - chapterB;
+        })
+      )
+    : {};
+        const arrValues = Object.values(test)
+        console.log("check value", arrValues);
+        const arrKeys = Object.keys(test)
      const getChapterFromUrl = (url) => {
     const parts = url.split('/');
     return parts[parts.length - 2];
@@ -115,18 +126,34 @@ const ReadChapter = () => {
         const response = await axios.get(
           `https://apimanga.mangasocial.online/rmanga/${slug}`
         );
-      // console.log("check rs", response.data.chapters);
+      console.log("check rs", response.data.chapters);
       
-      
-       const arrValues = Object.values(response.data.chapters);
-
-
-
-      const getChapterFromUrl = (url) => {
+        const getChapterFromUrl = (url) => {
     const parts = url.split('/');
     return parts[parts.length - 1];
       };
       
+       const arrValues = response.data.chapters.sort((a, b) => {
+        const chapterA = parseFloat(
+          a.includes("chapter")
+            ? a.includes("novel")
+              ? a.match(/chapter-([\d.]+)/)
+              : a.match(/chapter-([\d.]+)/)[1]
+            : getChapterFromUrl(a)
+        );
+        const chapterB = parseFloat(
+          b.includes("chapter")
+            ? b.includes("novel")
+              ? b.match(/chapter-([\d.]+)/)
+              : b.match(/chapter-([\d.]+)/)[1]
+            : getChapterFromUrl(b)
+        );
+        return chapterA - chapterB;
+      });
+
+
+
+    
 
       // console.log("check key val",getChapterFromUrl(keys[0]) );
       const values = arrValues.map((item) => getChapterFromUrl(item))
@@ -259,7 +286,7 @@ const ReadChapter = () => {
              
               {listChapter?.map((item, index) => (
                 <option key={index} value={item}>
-                  {listNameChapter[index]}
+                  {readmode? listNameChapter[index] :`Chapter_${index+1}`}
                 </option>
               ))}
             </select>
@@ -323,7 +350,7 @@ const ReadChapter = () => {
                 </option>
               {listChapter?.map((item, index) => (
                 <option key={index} value={item}>
-                  {listNameChapter[index]}
+                  {readmode? listNameChapter[index] :`Chapter_${index+1}`}
                 </option>
               ))}
             </select>
