@@ -12,6 +12,7 @@ import Loading from "../../components/Loading/Loading";
 import LoadingWhite from "../../components/Loading/LoadingWhite";
 import { key } from "localforage";
 
+
 const ReadChapter = () => {
   const params = useParams();
   const { slug, id } = params;
@@ -52,17 +53,72 @@ const ReadChapter = () => {
     }
   };
 
-  const downloadIMG = async (imgsrc, imgname) => {
-    const imgBlob = await fetch(imgsrc)
-      .then((res) => res.arrayBuffer())
-      .then((buffer) => new Blob([buffer], { type: "image/jpg" }));
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(imgBlob);
-    link.download = imgname;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+// const downloadImages = async () => {
+//     const zip = new JSZip();
+// const  imageUrls = chapterDetail.image_chapter
+//     for (const url of imageUrls) {
+//       try {
+//         const response = await axios.get(url);
+//         const fileName = url.split('/').pop(); // Lấy tên file từ đường link
+//         zip.file(fileName, response.data);
+//       } catch (error) {
+//         console.error(`Error downloading image ${url}`, error);
+//       }
+//     }
+
+//     const content = await zip.generateAsync({ type: 'blob' });
+//     saveAs(content, 'comic.zip');
+// };
+  
+  const handleDownloadHTML = () => {
+     const { image_chapter, title, chapter_title } = chapterDetail;
+   
+   if (image_chapter && image_chapter.length > 0) {
+     const htmlContent =
+       ` <!DOCTYPE html>
+     <html lang="en">
+     <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>${title} - ${chapter_title}</title>
+     </head>
+     <body>
+      <div style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+" >
+      <h1>${title} - ${chapter_title}</h1>
+      ${image_chapter && image_chapter.length > 0 && image_chapter.map(
+         (imageUrl, index) => `<img src="${imageUrl}" alt="Image ${index + 1}"/>`
+       )
+         .join("\n")}</div>
+
+     </body>
+     </html>`
+    
+     const htmlBlob = new Blob([htmlContent], { type: "text/html" });
+     const htmlUrl = URL.createObjectURL(htmlBlob);
+     const downloadLink = document.createElement("a");
+     downloadLink.href = htmlUrl;
+     downloadLink.download = ` ${title}-${chapter_title}.html`;
+     document.body.appendChild(downloadLink);
+     downloadLink.click();
+
+     document.body.removeChild(downloadLink);
+     URL.revokeObjectURL(htmlUrl);
+   }
+   else { 
+     alert("Please wait for the image to finish downloading and try again")
+   }
+  } 
+
+
+    
+  
+  
   const handleDownload = () => {
     console.log(chapterDetail.image_chapter.length);
     console.log(chapterDetail.image_chapter[0]);
@@ -292,8 +348,8 @@ const ReadChapter = () => {
             </select>
           </div>
           <div>
-            <Button size="large" onClick={() => handleDownload()}>
-              Download
+            <Button size="large" onClick={() => handleDownloadHTML(chapterDetail)}>
+             Download
             </Button>
           </div>
           <div className="flex gap-2">

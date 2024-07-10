@@ -230,7 +230,7 @@ export default function Layout() {
     },
     {
       sv: 19,
-      name: "https://azoramoon.com",
+      name: "azoranov.com/series/",
       icon: (
         <GB
           title="Vietnamese"
@@ -585,6 +585,13 @@ export default function Layout() {
                           ? getChapterFromUrl(
                               item?.id_manga.replace(".html", "")
                             )
+                          : item?.id_manga.includes("novel")
+                          ? item?.id_manga.replace(
+                              `https://${
+                                new URL(`${item?.id_manga}`).hostname
+                              }/`,
+                              ""
+                            )
                           : item?.id_manga.replace(
                               `https://${
                                 new URL(`${item?.id_manga}`).hostname
@@ -665,7 +672,6 @@ export default function Layout() {
                     key={index}
                     className="w-[90%] h-full border-double border-red-900 rounded-lg flex border-4 cursor-pointer  "
                   >
-                    {console.log("check search", item)}
                     <img
                       className="w-1/3 h-[69%] py-2 rounded-lg"
                       src={item.poster}
@@ -676,6 +682,11 @@ export default function Layout() {
                         item?.id_manga.includes(".html")
                           ? getChapterFromUrl(
                               item?.id_manga.replace(".html", "")
+                            )
+                          : item?.id_manga.includes("novel")
+                          ? item?.id_manga.replace(
+                              "https://bestlightnovel.com/",
+                              ""
                             )
                           : item?.id_manga.replace(
                               `https://${

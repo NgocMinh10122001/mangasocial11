@@ -67,7 +67,7 @@ const NewRelease = () => {
               chapterLink={item.url_chapter || item?.id_chapter}
               path_segment={
                 item?.url_chapter
-                  ? getChapterFromUrl(item?.id_manga || item?.url_manga)
+                  ? item?.path_segment_manga
                   : getChapterFromUrl2(item.link_server_novel)
               }
             />

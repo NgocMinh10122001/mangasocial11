@@ -45,13 +45,13 @@ const ChapterPage = () => {
   const handleSendComment = async () => {
     try {
       const res = await axios.post(
-        `https://apimanga.mangasocial.online/cmanga/${slug}/${user_id}/`,
+        `https://apimanga.mangasocial.online/cmanga/${slug.includes(".html")? slug.replace(".html",""):slug}/${user_id}/`,
         { content: comment }
       );
       // console.log("response:", res);
       // console.log("comment:", comment);
       if (res) { 
-        let resc = await axios.get(`https://apimanga.mangasocial.online/cmanga/${slug}`)
+        let resc = await axios.get(`https://apimanga.mangasocial.online/cmanga/${slug.includes(".html")? slug.replace(".html",""):slug}`)
         setComment("")
 
         if (resc) setCommentDetail(resc.data)
@@ -99,7 +99,7 @@ const ChapterPage = () => {
   };
 
   const fetchListComment = async () => { 
-    let resc = await axios.get(`https://apimanga.mangasocial.online/cmanga/${slug}`)
+    let resc = await axios.get(`https://apimanga.mangasocial.online/cmanga/${slug.includes(".html")? slug.replace(".html",""):slug}`)
     if(resc) setCommentDetail(resc.data)
   }
  
