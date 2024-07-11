@@ -524,7 +524,7 @@ export default function Layout() {
           <div onClick={() => navigate("/" + sv + `/policy`)}>
             <p className="policy">Policy</p>
           </div>
-          <div
+          <Link
             to={`https://apps.apple.com/us/app/manga-reader-mangakomi-online/id6446646720`}
           >
             <img
@@ -532,7 +532,7 @@ export default function Layout() {
               alt=""
               className="w-5 h-5 lg:w-12 lg:h-12 hover:scale-105 transition-all cursor-pointer"
             />
-          </div>
+          </Link>
         </div>
         <div className="avatar_search">
           <CiSearch
@@ -832,9 +832,9 @@ export default function Layout() {
           <div className="fixed inset-0 bg-black opacity-50"></div>
           <div className="z-10 p-8 text-center bg-white rounded-md">
             <h2 className="mb-4 text-2xl font-bold">Dowload App</h2>
-            <div to={link}>
+            <Link to={link}>
               <img src={modalContent} alt="ios" style={{ width: "200px" }} />
-            </div>
+            </Link>
             <button
               onClick={closeModal}
               className="px-4 py-2 mt-4 text-white bg-red-500 rounded"
